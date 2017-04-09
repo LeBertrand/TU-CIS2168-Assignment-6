@@ -5,32 +5,37 @@
  * Both files SearchTree.java and BinaryTree1.java are included in the folder here.
  */
 package assign6_shmuel_jacobs;
+
 /*<listing chapter="6" section="4">*/
 //package KW.CH06;
-
 import java.util.List;
 import java.util.ArrayList;
 
 /**
  * A class to represent a binary search tree.
+ *
  * @author Koffman and Wolfgang
  */
 public class BinarySearchTree<E extends Comparable<E>>
-         extends BinaryTree1<E>
+        extends BinaryTree1<E>
         implements SearchTree<E> {
     // Data Fields
 
-    /** Return value from the public add method. */
+    /**
+     * Return value from the public add method.
+     */
     protected boolean addReturn;
-    /** Return value from the public delete method. */
+    /**
+     * Return value from the public delete method.
+     */
     protected E deleteReturn;
 
     //Methods
     /*<listing chapter="6" number="3">*/
     /**
      * Starter method find.
-     * @pre The target object must implement
-     *      the Comparable interface.
+     *
+     * @pre The target object must implement the Comparable interface.
      * @param target The Comparable object being sought
      * @return The object, if found, otherwise null
      */
@@ -41,6 +46,7 @@ public class BinarySearchTree<E extends Comparable<E>>
 
     /**
      * Recursive find method.
+     *
      * @param localRoot The local subtree�s root
      * @param target The object being sought
      * @return The object, if found, otherwise null
@@ -60,16 +66,17 @@ public class BinarySearchTree<E extends Comparable<E>>
             return find(localRoot.right, target);
         }
     }
+
     /*</listing>*/
 
-    /*<listing chapter="6" number="4">*/
+ /*<listing chapter="6" number="4">*/
     /**
      * Starter method add.
-     * @pre The object to insert must implement the
-     *      Comparable interface.
+     *
+     * @pre The object to insert must implement the Comparable interface.
      * @param item The object being inserted
-     * @return true if the object is inserted, false
-     *         if the object already exists in the tree
+     * @return true if the object is inserted, false if the object already
+     * exists in the tree
      */
     @Override
     public boolean add(E item) {
@@ -79,12 +86,12 @@ public class BinarySearchTree<E extends Comparable<E>>
 
     /**
      * Recursive add method.
-     * @post The data field addReturn is set true if the item is added to
-     *       the tree, false if the item is already in the tree.
+     *
+     * @post The data field addReturn is set true if the item is added to the
+     * tree, false if the item is already in the tree.
      * @param localRoot The local root of the subtree
      * @param item The object to be inserted
-     * @return The new local root that now contains the
-     *         inserted item
+     * @return The new local root that now contains the inserted item
      */
     private Node<E> add(Node<E> localRoot, E item) {
         if (localRoot == null) {
@@ -105,17 +112,18 @@ public class BinarySearchTree<E extends Comparable<E>>
             return localRoot;
         }
     }
+
     /*</listing>*/
 
-    /*<listing chapter="6" number="5">*/
+ /*<listing chapter="6" number="5">*/
     /**
      * Starter method delete.
+     *
      * @post The object is not in the tree.
      * @param target The object to be deleted
-     * @return The object deleted from the tree
-     *         or null if the object was not in the tree
-     * @throws ClassCastException if target does not implement
-     *         Comparable
+     * @return The object deleted from the tree or null if the object was not in
+     * the tree
+     * @throws ClassCastException if target does not implement Comparable
      */
     public E delete(E target) {
         root = delete(root, target);
@@ -124,14 +132,12 @@ public class BinarySearchTree<E extends Comparable<E>>
 
     /**
      * Recursive delete method.
-     * @post The item is not in the tree;
-     *       deleteReturn is equal to the deleted item
-     *       as it was stored in the tree or null
-     *       if the item was not found.
+     *
+     * @post The item is not in the tree; deleteReturn is equal to the deleted
+     * item as it was stored in the tree or null if the item was not found.
      * @param localRoot The root of the current subtree
      * @param item The item to be deleted
-     * @return The modified local root that does not contain
-     *         the item
+     * @return The modified local root that does not contain the item
      */
     private Node<E> delete(Node<E> localRoot, E item) {
         if (localRoot == null) {
@@ -180,16 +186,16 @@ public class BinarySearchTree<E extends Comparable<E>>
             }
         }
     }
+
     /*</listing>*/
 
-    /*<listing chapter="6" number="6">*/
+ /*<listing chapter="6" number="6">*/
     /**
-     * Find the node that is the
-     * inorder predecessor and replace it
-     * with its left child (if any).
+     * Find the node that is the inorder predecessor and replace it with its
+     * left child (if any).
+     *
      * @post The inorder predecessor is removed from the tree.
-     * @param parent The parent of possible inorder
-     *        predecessor (ip)
+     * @param parent The parent of possible inorder predecessor (ip)
      * @return The data in the ip
      */
     private E findLargestChild(Node<E> parent) {
@@ -203,11 +209,11 @@ public class BinarySearchTree<E extends Comparable<E>>
             return findLargestChild(parent.right);
         }
     }
+
     /*</listing>*/
-
-
-    /** To be implemented by Students.
-     * Determine if an item is in the tree
+    /**
+     * To be implemented by Students. Determine if an item is in the tree
+     *
      * @param target Item being sought in tree
      * @return true If the item is in the tree, false otherwise
      */
@@ -215,14 +221,110 @@ public class BinarySearchTree<E extends Comparable<E>>
         return false;
     }
 
-    /** To be implemented by Students.
-     * Removes target from tree.
+    /**
+     * To be implemented by Students. Removes target from tree.
+     *
      * @param target Item to be removed
      * @return true if the object was in the tree, false otherwise
      * @post target is not in the tree
      */
     public boolean remove(E target) {
         return false;
+    }
+
+    /**
+     * Recursive method for finding the depth of the minimum value in a tree.
+     *
+     * @param localRoot root of the tree to check
+     * @return depth in tree of minimum value
+     * @throws NullPointerException if localRoot is null
+     */
+    private int depthOfMinValueRecursive(Node localRoot) {
+        if (localRoot.left == null) {
+            return 1;
+        }
+        return 1 + depthOfMinValueRecursive(localRoot.left);
+    }
+
+    /**
+     * Public wrapper method for recursively finding depth of minimum value in
+     * calling tree.
+     *
+     * @return 0 if tree is empty, else depth of minimum value
+     */
+    public int depthOfMinValueRecursive() {
+        if (root == null) {
+            return 0;
+        } else {
+            return depthOfMinValueRecursive(root);
+        }
+    }
+
+    /**
+     * Iterative method for finding the depth of the minimum value in a tree.
+     *
+     * @param localRoot root of the tree to check
+     * @return depth in tree of minimum value
+     * @throws NullPointerException if localRoot is null
+     */
+    private int depthOfMinValueIterative(Node localRoot) {
+        int depth = 1;
+        while (localRoot.left != null) {
+            depth += 1;
+            localRoot = localRoot.left;
+        }
+        return depth;
+    }
+
+    /**
+     * Public wrapper method for iteratively finding depth of minimum value in
+     * calling tree.
+     *
+     * @return 0 if tree is empty, else depth of minimum value
+     */
+    public int depthOfMinValueIterative() {
+        if (root == null) {
+            return 0;
+        }
+        return depthOfMinValueIterative(root);
+    }
+
+    /**
+     * Check that tree rooted at localRoot has the same shape as tree rooted at
+     * compareTo.
+     *
+     * @param localRoot root of tree to check against (for use as root of
+     * calling tree)
+     * @param compareTo root of tree to compare
+     * @return true if trees have same structure, else false
+     */
+    private static boolean equalStruct(Node localRoot, Node compareTo) {
+        boolean same = true;
+
+        //try all fail cases
+        if (localRoot == null || compareTo == null) {
+            same = (localRoot == compareTo);
+        } else if (!equalStruct(localRoot.right, compareTo.right)) {
+            //they don't have matching right subtrees
+            same = false;
+        } else if (!equalStruct(localRoot.left, compareTo.left)) {
+            same = false;
+        }
+        return same;
+    }
+
+    /**
+     * Public wrapper method for checking that tree in arguments has the 
+     * same structure as calling tree.
+     * @param bst2 the tree to check for same structure.
+     * @return true if trees have same shape, false otherwise
+     */
+    public boolean equalStruct(BinarySearchTree bst2) {
+
+        if (bst2 == null) {
+            return false;
+        }
+        return equalStruct(root, bst2.root);
     }
 }
 /*</listing>*/
