@@ -1,8 +1,11 @@
-/* The parent class of BinarySearchTree is the BinaryTree1 class
- *   that was covered in Lec#14, Lec#15.
- * The interface SearchTree implemented by BinarySearchTree was
- *   also covered in Lec#14.
- * Both files SearchTree.java and BinaryTree1.java are included in the folder here.
+/* 
+ * CIS2168 006 Data Structures Spring 2017
+ * Shmuel Jacobs shmuel.jacobs@temple.edu
+ * Assignment 6
+ * BinarySearchTree
+ * Implementation of binary search tree, including some essential methods
+ * and methods for finding depth of minimum value in tree and checking
+ * that two trees have the same structure.
  */
 package assign6_shmuel_jacobs;
 
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 /**
  * A class to represent a binary search tree.
  *
- * @author Koffman and Wolfgang
+ * @author Koffman and Wolfgang with modification by Shmuel Jacobs
  */
 public class BinarySearchTree<E extends Comparable<E>>
         extends BinaryTree1<E>
@@ -304,6 +307,7 @@ public class BinarySearchTree<E extends Comparable<E>>
         //try all fail cases
         if (localRoot == null || compareTo == null) {
             same = (localRoot == compareTo);
+            //from here, control falls through to return statement
         } else if (!equalStruct(localRoot.right, compareTo.right)) {
             //they don't have matching right subtrees
             same = false;
@@ -314,8 +318,9 @@ public class BinarySearchTree<E extends Comparable<E>>
     }
 
     /**
-     * Public wrapper method for checking that tree in arguments has the 
-     * same structure as calling tree.
+     * Public wrapper method for checking that tree in arguments has the same
+     * structure as calling tree.
+     *
      * @param bst2 the tree to check for same structure.
      * @return true if trees have same shape, false otherwise
      */

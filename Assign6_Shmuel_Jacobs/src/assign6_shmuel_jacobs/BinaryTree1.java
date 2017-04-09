@@ -2,7 +2,6 @@ package assign6_shmuel_jacobs;
 
 
 /*<listing chapter="6" section="3">*/
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
@@ -10,25 +9,36 @@ import java.util.Scanner;
 
 /**
  * Class for a binary tree that stores type E objects.
+ *
  * @author Koffman and Wolfgang
- **/
+ *
+ */
 public class BinaryTree1<E> implements Serializable {
 
     /*<listing chapter="6" number="1">*/
-    /** Class to encapsulate a tree node. */
+    /**
+     * Class to encapsulate a tree node.
+     */
     protected static class Node<E> implements Serializable {
         // Data Fields
 
-        /** The information stored in this node. */
+        /**
+         * The information stored in this node.
+         */
         public E data;
-        /** Reference to the left child. */
+        /**
+         * Reference to the left child.
+         */
         public Node<E> left;
-        /** Reference to the right child. */
+        /**
+         * Reference to the right child.
+         */
         public Node<E> right;
 
         // Constructors
         /**
          * Construct a node with given data and no children.
+         *
          * @param data The data to store in this node
          */
         public Node(E data) {
@@ -40,6 +50,7 @@ public class BinaryTree1<E> implements Serializable {
         // Methods
         /**
          * Returns a string representation of the node.
+         *
          * @return A string representation of the data fields
          */
         @Override
@@ -49,17 +60,22 @@ public class BinaryTree1<E> implements Serializable {
     }
     /*</listing>*/
     // Data Field
-    /** The root of the binary tree */
+    /**
+     * The root of the binary tree
+     */
     protected Node<E> root;
 
-    /** Construct an empty BinaryTree1 */
+    /**
+     * Construct an empty BinaryTree1
+     */
     public BinaryTree1() {
         root = null;
     }
 
     /**
-     * Construct a BinaryTree1 with a specified root.
-     * Should only be used by subclasses.
+     * Construct a BinaryTree1 with a specified root. Should only be used by
+     * subclasses.
+     *
      * @param root The node that is the root of the tree.
      */
     protected BinaryTree1(Node<E> root) {
@@ -67,8 +83,8 @@ public class BinaryTree1<E> implements Serializable {
     }
 
     /**
-     * Constructs a new binary tree with data in its root,leftTree
-     * as its left subtree and rightTree as its right subtree.
+     * Constructs a new binary tree with data in its root,leftTree as its left
+     * subtree and rightTree as its right subtree.
      */
     public BinaryTree1(E data, BinaryTree1<E> leftTree,
             BinaryTree1<E> rightTree) {
@@ -87,8 +103,9 @@ public class BinaryTree1<E> implements Serializable {
 
     /**
      * Return the left subtree.
-     * @return The left subtree or null if either the root or
-     * the left subtree is null
+     *
+     * @return The left subtree or null if either the root or the left subtree
+     * is null
      */
     public BinaryTree1<E> getLeftSubtree() {
         if (root != null && root.left != null) {
@@ -100,9 +117,9 @@ public class BinaryTree1<E> implements Serializable {
 
     /**
      * Return the right sub-tree
-     * @return the right sub-tree or
-     *         null if either the root or the
-     *         right subtree is null.
+     *
+     * @return the right sub-tree or null if either the root or the right
+     * subtree is null.
      */
     public BinaryTree1<E> getRightSubtree() {
         if (root != null && root.right != null) {
@@ -114,8 +131,8 @@ public class BinaryTree1<E> implements Serializable {
 
     /**
      * Return the data field of the root
-     * @return the data field of the root
-     *         or null if the root is null
+     *
+     * @return the data field of the root or null if the root is null
      */
     public E getData() {
         if (root != null) {
@@ -127,6 +144,7 @@ public class BinaryTree1<E> implements Serializable {
 
     /**
      * Determine whether this tree is a leaf.
+     *
      * @return true if the root has no children
      */
     public boolean isLeaf() {
@@ -142,6 +160,7 @@ public class BinaryTree1<E> implements Serializable {
 
     /**
      * Perform a preorder traversal.
+     *
      * @param node The local root
      * @param depth The depth
      * @param sb The string buffer to save the output
@@ -164,8 +183,9 @@ public class BinaryTree1<E> implements Serializable {
     /*<listing chapter="6" number="2">*/
     /**
      * Method to read a binary tree.
-     * @pre The input consists of a preorder traversal
-     *      of the binary tree. The line "null" indicates a null tree.
+     *
+     * @pre The input consists of a preorder traversal of the binary tree. The
+     * line "null" indicates a null tree.
      * @param scan the Scanner attached to the input file
      * @return The binary tree
      */
